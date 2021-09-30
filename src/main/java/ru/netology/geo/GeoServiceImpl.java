@@ -22,7 +22,7 @@ public class GeoServiceImpl implements GeoService {
         } else if (ip.startsWith("172.")) {
             return new Location("Moscow", Country.RUSSIA, null, 0);
         } else if (ip.startsWith("96.")) {
-            return new Location("New York", Country.USA, null,  0);
+            return new Location("New York", Country.USA, null, 0);
         }
         return null;
     }
@@ -31,6 +31,20 @@ public class GeoServiceImpl implements GeoService {
      * Метод определяет локацию по координатам
      */
     public Location byCoordinates(double latitude, double longitude) {
-        throw new RuntimeException("Not implemented");
+        if (latitude == 0.0 && longitude == 0.0) {
+            return new Location(null, null, null, 0);
+        } else if (latitude == 55.613753 && longitude == 37.202703) {
+            return new Location("Moscow", Country.RUSSIA, "Lenina", 15);
+        } else if (latitude == 40.741193 && longitude == -74.008487) {
+            return new Location("New York", Country.USA, " 10th Avenue", 32);
+        } else if ((55.425522 <= latitude && latitude <= 55.613753) &&
+                (37.202703 <= longitude && longitude <= 38.553841)) {
+            return new Location("Moscow", Country.RUSSIA, null, 0);
+        } else if ((38.069788 <= latitude && latitude <= 40.741193) &&
+                (-74.008487 <= longitude && longitude <= -73.891508)) {
+            return new Location("New York", Country.USA, null, 0);
+        }
+        return null;
     }
 }
+
